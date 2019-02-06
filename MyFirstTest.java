@@ -20,8 +20,7 @@ public class MyFirstTest {
     public void start(){
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        wait = new WebDriverWait(driver, 20);
-
+        wait = new WebDriverWait(driver, 10);
     }
 
     @Test
@@ -31,6 +30,8 @@ public class MyFirstTest {
         wait.until(visibilityOfElementLocated(By.name("btnK")));
         driver.findElement(By.name("btnK")).click();
         wait.until(titleIs("webdriver - Пошук Google"));
+        driver.findElement(By.className("LC20lb")).click();
+        driver.findElement(By.linkText("Browser Automation"));
     }
 
     @After
