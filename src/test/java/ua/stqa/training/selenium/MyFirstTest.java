@@ -24,14 +24,12 @@ public class MyFirstTest {
     }
 
     @Test
-    public void myFirstTest(){
-        driver.navigate().to("http://www.google.com");
-        driver.findElement(By.name("q")).sendKeys("webdriver");
-        wait.until(visibilityOfElementLocated(By.name("btnK")));
-        driver.findElement(By.name("btnK")).click();
-        wait.until(titleIs("webdriver - Поиск в Google"));
-        driver.findElement(By.className("LC20lb")).click();
-        driver.findElement(By.linkText("Browser Automation"));
+    public void loginToAdminPanel(){
+        driver.navigate().to("http://localhost/litecard/admin");
+        driver.findElement(By.name("username")).sendKeys("admin");
+        driver.findElement(By.name("password")).sendKeys("admin");
+        driver.findElement(By.name("login")).click();
+        wait.until(visibilityOfElementLocated(By.xpath("//img[@title='My Store']")));
     }
 
     @After
