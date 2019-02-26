@@ -15,7 +15,6 @@ public class FindingElements extends TestBase {
         loginToAdminPanel();
         List<WebElement> menuItems = driver.findElements(By.cssSelector("#app-"));
         for (int i=0; i<menuItems.size(); i++) {
-            menuItems = driver.findElements(By.cssSelector("#app-"));
             menuItems.get(i).click();
             if (isElementPresent(By.xpath("//li[starts-with(@id,'doc-')]"))) {
                 List<WebElement> subItems = driver.findElements(By.xpath("//li[starts-with(@id,'doc-')]"));
