@@ -1,5 +1,6 @@
 package ua.stqa.training.selenium;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -14,15 +15,15 @@ public class AlertsWindowsAndFrames extends TestBase{
         driver.navigate().to("http://localhost/litecard/admin/?app=countries&doc=countries");
         driver.findElement(By.className("button")).click();
         List<WebElement> externalLinks = driver.findElements(By.cssSelector("[class$=fa-external-link]"));
-        String mainWindow = driver.getWindowHandle();
+        String currentWindow = driver.getWindowHandle();
         Set<String> existingWindows = driver.getWindowHandles();
         for (WebElement link : externalLinks){
             link.click();
             String newWindow = wait.until(anyWindowOtherThan(existingWindows));
+            Assert.assertNotEquals(newWindow, currentWindow);
             driver.switchTo().window(newWindow);
             driver.close();
-            driver.switchTo().window(mainWindow);
+            driver.switchTo().window(currentWindow);
         }
     }
-
 }
