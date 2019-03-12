@@ -6,7 +6,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.Set;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
@@ -54,4 +57,17 @@ public class TestBase {
     public boolean areElementsPresent(By locator){
         return driver.findElements(locator).size()>0;
     }
+
+    public ExpectedCondition<String> anyWindowOtherThan (Set<String> stringSet){
+        return new ExpectedCondition <String>(){
+            public String apply(WebDriver driver){
+                Set <String> handles = driver.getWindowHandles();
+                handles.removeAll(stringSet);
+                return handles.size()>0 ? handles.iterator().next() : null;
+            }
+        };
+
+    }
+
+
 }
